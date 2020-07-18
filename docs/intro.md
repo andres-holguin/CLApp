@@ -8,7 +8,7 @@
 
 ### - Then, check out the [rules](/docs/rules.md) for this repo.
 
-Each of the following features need their own design documents:
+All of the following features were thought of during the CLO App ideation meeting in January 2020. Each of these features will need their own design documents:
 - [ ] Database Schemas
 - [ ] User Registration / Sign-in
 - [ ] Role assignation (Guest, Alumn, Resident, Admin, etc.)

@@ -1,0 +1,2 @@
+# Repository (repo)
+A repository (shorthand: repo) is basically the collection of all materials related to a single [Git](/docs/glossary/git.md) project. The repository keeps track of all of the [branches](/docs/glossary/branch.md) and all of the [commits](/docs/glossary/commit.md) that have been saved in a project. You can then [checkout](/docs/glossary/checkout.md) individual branches to browse the files on each one.

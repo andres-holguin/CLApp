@@ -7,4 +7,4 @@
 - draw.io
 
 **TODO: Flesh out this document as a guide for developers**
-- make sure to [fork](https://github.com/andres-holguin/CLApp/blob/master/docs/glossary/fork.md) this repository to start contributing.
+- make sure to [fork](https://github.com/andres-holguin/CLApp/blob/documentation/docs/glossary/fork.md) this repository to start contributing.

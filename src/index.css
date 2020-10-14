@@ -1,5 +1,34 @@
+
+.title {
+  font-size: 25px;
+  font-family: Arial;
+  color: #e3e3e3;
+  position: relative;
+  top: 10px;
+}
+
+.topBar {
+  height: 50px;
+  background-color: #424242;
+  text-align: center;
+  border: 2px solid rgb(20, 20, 20);
+}
+
+.buffer {
+  margin-top: 10px;
+}
+
+.sideBar {
+  width: 75px;
+  background-color: #c9c9c9;
+  text-align: center;
+  margin-right: -15px;
+  border: 2px solid gray;
+}
+
+
 body {
-  margin: 0;
+  background-color: rgb(240, 240, 240);
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
@@ -11,3 +40,4 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+

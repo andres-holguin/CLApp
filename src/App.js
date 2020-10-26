@@ -72,6 +72,8 @@ function App() {
             //initialView="dayGridMonth"
             events={events}
             dayMaxEvents
+            hiddenDays={[6]} // Omit Saturday
+            validRange={{start: "2020-08-05", end: "2020-12-31"}} // TODO: Determine start and end of semester "For non-admins"
           />
           <CSVUploader setEvents={setEvents}/>
         </Col>

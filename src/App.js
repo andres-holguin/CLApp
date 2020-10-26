@@ -16,6 +16,36 @@ let initEvents = [
   },
   {
     //id: createEventId(),
+    title: 'All-day event',
+    start: todayStr
+  },
+  {
+    //id: createEventId(),
+    title: 'All-day event',
+    start: todayStr
+  },
+  {
+    //id: createEventId(),
+    title: 'All-day event',
+    start: todayStr
+  },
+  {
+    //id: createEventId(),
+    title: 'All-day event',
+    start: todayStr
+  },
+  {
+    //id: createEventId(),
+    title: 'All-day event',
+    start: todayStr
+  },
+  {
+    //id: createEventId(),
+    title: 'All-day event',
+    start: todayStr
+  },
+  {
+    //id: createEventId(),
     title: 'Timed event',
     start: new Date()
   }
@@ -38,9 +68,10 @@ function App() {
         </Col>
         <Col>
           <FullCalendar
-          plugins={[ dayGridPlugin ]}
-          initialView="dayGridMonth"
-          events={events}
+            plugins={[ dayGridPlugin ]}
+            //initialView="dayGridMonth"
+            events={events}
+            dayMaxEvents
           />
           <CSVUploader setEvents={setEvents}/>
         </Col>

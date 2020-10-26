@@ -1,0 +1,6 @@
+.hidden-overflow {
+  overflow: hidden;
+  display: block;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}

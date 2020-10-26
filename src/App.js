@@ -60,6 +60,17 @@ function App() {
     setEvents(initEvents);
   }
 
+  // TODO: Modify to highlight resident and detail differently
+  function renderEventContent(eventInfo) {
+    return (
+      <div className="hidden-overflow">
+        <i>{eventInfo.event.title}</i>
+        <> </>
+        <b>{eventInfo.event.extendedProps.residentName}</b>
+      </div>
+    )
+  }
+
   return (
     <Container fluid>
       <Row>
@@ -72,6 +83,7 @@ function App() {
             //initialView="dayGridMonth"
             events={events}
             dayMaxEvents
+            eventContent={renderEventContent}
             hiddenDays={[6]} // Omit Saturday
             validRange={{start: "2020-08-05", end: "2020-12-31"}} // TODO: Determine start and end of semester "For non-admins"
           />

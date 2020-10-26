@@ -34,16 +34,15 @@ function App() {
     <Container fluid>
       <Row>
         <Col md="0.5">
-          <CSVUploader setEvents={setEvents}/>
+          Nav Bar
         </Col>
         <Col>
-          <div className="App">
           <FullCalendar
           plugins={[ dayGridPlugin ]}
           initialView="dayGridMonth"
           events={events}
           />
-          </div>
+          <CSVUploader setEvents={setEvents}/>
         </Col>
         <Col md="2">
           <SwapList></SwapList>

@@ -2,38 +2,28 @@ import React from 'react'
 import Papa from 'papaparse'
 
 export default function CSVUploader(props) {
-  // let initEvents = [
-  //   {
-  //     //id: createEventId(),
-  //     title: 'All-day event',
-  //     start: todayStr
-  //   },
-  //   {
-  //     //id: createEventId(),
-  //     title: 'Timed event',
-  //     start: new Date()
-  //   }
-  // ]
+
+  // Create event objects from the parsed data
   function createEvents(fileData) {
     console.log(fileData)
     let arr = [];
-    let id = 0;
-    for (var i=0; i<fileData.length; i++) {
+    // let id = 0;
+    fileData.forEach(detail => {
       arr.push({
-        id: id++,
-        title: fileData[i].Type + "-" + fileData[i].Detail,
-        start: fileData[i].Date,
+        // id: id++,
+        title: detail.Type + "-" + detail.Detail,
+        start: detail.Date,
         extendedProps: {
-          residentName: fileData[i].Name
+          residentName: detail.Name
         }
-      })
-    }
+      });
+    });
     return arr;
   }
 
   function handleChange(e) {
     let file = e.target.files[0]
-    if (!file) return; // User had a file, but then canceled when choosing a new one
+    if (!file) return; // User canceled when choosing a file
     Papa.parse(file, {
       header: true,
       complete: (parsedFile) => props.setEvents(createEvents(parsedFile.data))

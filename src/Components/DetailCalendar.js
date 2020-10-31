@@ -1,20 +1,29 @@
 import React, { useEffect, useState } from 'react';
 import FullCalendar from '@fullcalendar/react'
 import dayGridPlugin from '@fullcalendar/daygrid'
+import interactionPlugin from '@fullcalendar/interaction';
 import CSVUploader from './CSVUploader.js';
 
 let todayStr = new Date().toISOString().replace(/T.*$/, '') // YYYY-MM-DD of today
 
+let id = 0;
+// TODO: Move outside component and include as prop
 let initEvents = [
   {
-    //id: createEventId(),
-    title: 'All-day event',
-    start: todayStr
+    id: id++,
+    title: "COM-REC",
+    start: "2020-10-28",
+    extendedProps: {
+      residentName: "Andres"
+    }
   },
   {
-    //id: createEventId(),
-    title: 'All-day event',
-    start: todayStr
+    id: id++,
+    title: "COM-NHAL",
+    start: "2020-10-26",
+    extendedProps: {
+      residentName: "Derek"
+    }
   },
   {
     //id: createEventId(),
@@ -49,7 +58,7 @@ let initEvents = [
 ]
 
 export default function DetailCalendar(props) {
-  const [events, setEvents] = useState(null);
+  const [events, setEvents] = useState(null); // TODO: Use as prop
   useEffect(fetchEvents,[]);
 
   function fetchEvents() {
@@ -67,12 +76,29 @@ export default function DetailCalendar(props) {
     )
   }
 
+  function updateDate(changeInfo) {
+    let changedEvent = changeInfo.event;
+    // TODO: Build custom changeInfo object first, or just pass in FullCalendar's changeInfo object
+    setEvents(events.map(event => {
+      // eslint-disable-next-line
+      if (event.id == changedEvent.id) return {
+        id: changedEvent.id,
+        title: changedEvent.title,
+        start: changedEvent.startStr,
+        extendedProps: changedEvent.extendedProps
+      }
+      else return event;
+    }));
+  }
+
   return (
     <>
       <FullCalendar
-        plugins={[ dayGridPlugin ]}
+        eventStartEditable
+        plugins={[ dayGridPlugin, interactionPlugin ]}
         //initialView="dayGridMonth"
         events={events}
+        eventChange={updateDate}
         dayMaxEvents
         eventContent={renderEventContent}
         hiddenDays={[6]} // Omit Saturday

@@ -79,6 +79,11 @@ export default function DetailCalendar(props) {
   function updateDate(changeInfo) {
     let changedEvent = changeInfo.event;
     // TODO: Build custom changeInfo object first, or just pass in FullCalendar's changeInfo object
+    props.onEventChange({
+      message: changedEvent.extendedProps.residentName + " moved their " 
+                + changedEvent.title + " detail to " 
+                + changedEvent.startStr + " from " + changeInfo.oldEvent.startStr + "."
+    });
     setEvents(events.map(event => {
       // eslint-disable-next-line
       if (event.id == changedEvent.id) return {

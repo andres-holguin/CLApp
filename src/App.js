@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './App.css';
 import { Container, Row, Col } from 'react-bootstrap'
 import DetailCalendar from './Components/DetailCalendar.js'
@@ -6,6 +6,10 @@ import SwapList from './Components/SwapList.js'
 
 
 function App() {
+  const [log, setLog] = useState(["Hello", "World"])
+  function handleEventChange(changeInfo) {
+    setLog(log.concat(changeInfo.message))
+  }
 
   return (
     <Container fluid>
@@ -14,10 +18,11 @@ function App() {
           Nav Bar
         </Col>
         <Col>
-          <DetailCalendar/>
+          <DetailCalendar onEventChange={handleEventChange}/>
         </Col>
         <Col md="2">
           <SwapList></SwapList>
+          {log.map(text => <div key={text}>{text}</div>)}
         </Col>
         <Col md="1">
           Filters

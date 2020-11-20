@@ -7,10 +7,10 @@ export default function CSVUploader(props) {
   function createEvents(fileData) {
     console.log(fileData)
     let arr = [];
-    // let id = 0;
+    let id = 0;
     fileData.forEach(detail => {
       arr.push({
-        // id: id++,
+        id: id++,
         title: detail.Type + "-" + detail.Detail,
         start: detail.Date,
         extendedProps: {

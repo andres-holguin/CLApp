@@ -26,32 +26,32 @@ let initEvents = [
     }
   },
   {
-    //id: createEventId(),
+    id: id++,
     title: 'All-day event',
     start: todayStr
   },
   {
-    //id: createEventId(),
+    id: id++,
     title: 'All-day event',
     start: todayStr
   },
   {
-    //id: createEventId(),
+    id: id++,
     title: 'All-day event',
     start: todayStr
   },
   {
-    //id: createEventId(),
+    id: id++,
     title: 'All-day event',
     start: todayStr
   },
   {
-    //id: createEventId(),
+    id: id++,
     title: 'All-day event',
     start: todayStr
   },
   {
-    //id: createEventId(),
+    id: id++,
     title: 'Timed event',
     start: new Date()
   }

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import FullCalendar from '@fullcalendar/react'
 import dayGridPlugin from '@fullcalendar/daygrid'
 import interactionPlugin from '@fullcalendar/interaction';
+import EventModal from './EventModal.js'
 import CSVUploader from './CSVUploader.js';
 
 let todayStr = new Date().toISOString().replace(/T.*$/, '') // YYYY-MM-DD of today
@@ -59,6 +60,8 @@ let initEvents = [
 
 export default function DetailCalendar(props) {
   const [events, setEvents] = useState(null); // TODO: Use as prop
+  const [selectedEvent, setSelectedEvent] = useState(null);
+  const [showModal, setShowModal] = useState(false);
   useEffect(fetchEvents,[]);
 
   function fetchEvents() {
@@ -74,6 +77,12 @@ export default function DetailCalendar(props) {
         <b>{eventInfo.event.extendedProps.residentName}</b>
       </div>
     )
+  }
+
+  function handleEventClick(eventClickInfo) {
+    setShowModal(true);
+    setSelectedEvent(eventClickInfo.event);
+    console.log("Event was clicked: ", eventClickInfo.event)
   }
 
   function updateDate(changeInfo) {
@@ -103,12 +112,14 @@ export default function DetailCalendar(props) {
         plugins={[ dayGridPlugin, interactionPlugin ]}
         //initialView="dayGridMonth"
         events={events}
+        eventClick={handleEventClick}
         eventChange={updateDate}
         dayMaxEvents
         eventContent={renderEventContent}
         hiddenDays={[6]} // Omit Saturday
         validRange={{start: "2020-08-05", end: "2020-12-31"}} // TODO: Determine start and end of semester "For non-admins"
       />
+      <EventModal event={selectedEvent} show={showModal}/>
       <CSVUploader setEvents={setEvents}/>
     </>
   )

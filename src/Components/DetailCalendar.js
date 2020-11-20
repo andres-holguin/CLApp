@@ -85,6 +85,10 @@ export default function DetailCalendar(props) {
     console.log("Event was clicked: ", eventClickInfo.event)
   }
 
+  function handleModalClose() {
+    setShowModal(false);
+  }
+
   function updateDate(changeInfo) {
     let changedEvent = changeInfo.event;
     // TODO: Build custom changeInfo object first, or just pass in FullCalendar's changeInfo object
@@ -119,7 +123,7 @@ export default function DetailCalendar(props) {
         hiddenDays={[6]} // Omit Saturday
         validRange={{start: "2020-08-05", end: "2020-12-31"}} // TODO: Determine start and end of semester "For non-admins"
       />
-      <EventModal event={selectedEvent} show={showModal}/>
+      <EventModal event={selectedEvent} show={showModal} onHide={handleModalClose}/>
       <CSVUploader setEvents={setEvents}/>
     </>
   )

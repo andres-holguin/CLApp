@@ -12,17 +12,19 @@ let initEvents = [
   {
     id: id++,
     title: "COM-REC",
-    start: "2020-10-28",
+    start: "2020-12-28",
     extendedProps: {
-      residentName: "Andres"
+      residentName: "Andres",
+      comments: []
     }
   },
   {
     id: id++,
     title: "COM-NHAL",
-    start: "2020-10-26",
+    start: "2020-12-25",
     extendedProps: {
-      residentName: "Derek"
+      residentName: "Derek",
+      comments: ["Done", "Good Work", "Thanks"],
     }
   },
   {

@@ -64,6 +64,12 @@ function fetchDBEvents() {
   return JSON.parse(JSON.stringify(initEvents));
 }
 
+function updateEvent(newEvent) {
+  // eslint-disable-next-line
+  let eventToModIndex = initEvents.findIndex(event => event.id == newEvent.id);
+  initEvents[eventToModIndex] = newEvent;
+}
+
 export default function DetailCalendar(props) {
   // States
   const [events, setEvents] = useState(null); // TODO: Use as prop
@@ -105,6 +111,9 @@ export default function DetailCalendar(props) {
     setSelectedEvent(null);
   }
 
+  function handleUpdateEvent(newEvent) {
+    updateEvent(newEvent);
+    fetchEvents(); // Forces Calendar to reload with modified event
   }
 
   return (
@@ -118,7 +127,12 @@ export default function DetailCalendar(props) {
         hiddenDays={[6]} // Omit Saturday
         validRange={{start: "2020-08-05", end: "2020-12-31"}} // TODO: Determine start and end of semester "For non-admins"
       />
-      <EventModal event={selectedEvent} show={showModal} onHide={handleModalClose}/>
+      <EventModal 
+        event={selectedEvent} 
+        show={showModal} 
+        onHide={handleModalClose}
+        onUpdateEvent={handleUpdateEvent}
+      />
       <CSVUploader setEvents={setEvents}/>
     </>
   )

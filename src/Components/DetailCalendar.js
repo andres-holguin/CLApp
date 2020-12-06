@@ -73,6 +73,12 @@ export default function DetailCalendar(props) {
   // Effects
   /* Fetch events when first mounted */
   useEffect(fetchEvents,[]);
+  /* Update the selected event shown in the modal when events changes */
+  useEffect(() => {
+  // eslint-disable-next-line
+    selectedEvent && setSelectedEvent(events.find(event => event.id == selectedEvent.id));
+  // eslint-disable-next-line
+  },[events]);
 
   // Utility Functions
   function fetchEvents() {
@@ -81,7 +87,7 @@ export default function DetailCalendar(props) {
 
   function renderEventContent(eventInfo) {
     return (
-      <div className="hidden-overflow">
+      <div role="button" className="hidden-overflow">
         <i>{eventInfo.event.title}</i>
         <> </>
         <b>{eventInfo.event.extendedProps.residentName}</b>
@@ -92,11 +98,11 @@ export default function DetailCalendar(props) {
   function handleEventClick(eventClickInfo) {
     setShowModal(true);
     setSelectedEvent(eventClickInfo.event);
-    console.log("Event was clicked: ", eventClickInfo.event)
   }
 
   function handleModalClose() {
     setShowModal(false);
+    setSelectedEvent(null);
   }
 
   }

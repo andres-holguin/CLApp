@@ -59,15 +59,24 @@ let initEvents = [
   }
 ]
 
+function fetchDBEvents() {
+  console.log("Would fetch events here!"); // TODO: Fetch from DB
+  return JSON.parse(JSON.stringify(initEvents));
+}
+
 export default function DetailCalendar(props) {
+  // States
   const [events, setEvents] = useState(null); // TODO: Use as prop
   const [selectedEvent, setSelectedEvent] = useState(null);
   const [showModal, setShowModal] = useState(false);
+  
+  // Effects
+  /* Fetch events when first mounted */
   useEffect(fetchEvents,[]);
 
+  // Utility Functions
   function fetchEvents() {
-    console.log("Would fetch events here!");
-    setEvents(initEvents);
+    setEvents(fetchDBEvents());
   }
 
   function renderEventContent(eventInfo) {

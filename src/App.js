@@ -13,14 +13,8 @@ function App() {
   return (
     <Container fluid>
       <Row>
-        <Col md="0.5">
-          Nav Bar
-        </Col>
         <Col>
           <DetailCalendar onEventChange={handleEventChange}/>
-        </Col>
-        <Col md="1">
-          Filters
         </Col>
       </Row>
     </Container>

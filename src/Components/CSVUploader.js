@@ -14,7 +14,8 @@ export default function CSVUploader(props) {
         title: detail.Type + "-" + detail.Detail,
         start: detail.Date,
         extendedProps: {
-          residentName: detail.Name
+          residentName: detail.Name,
+          comments: []
         }
       });
     });

@@ -3,72 +3,7 @@ import FullCalendar from '@fullcalendar/react'
 import dayGridPlugin from '@fullcalendar/daygrid'
 import EventModal from './EventModal.js'
 import CSVUploader from './CSVUploader.js';
-
-let todayStr = new Date().toISOString().replace(/T.*$/, '') // YYYY-MM-DD of today
-
-let id = 0;
-// TODO: Move outside component and include as prop
-let initEvents = [
-  {
-    id: id++,
-    title: "COM-REC",
-    start: "2020-12-28",
-    extendedProps: {
-      residentName: "Andres",
-      comments: []
-    }
-  },
-  {
-    id: id++,
-    title: "COM-NHAL",
-    start: "2020-12-25",
-    extendedProps: {
-      residentName: "Derek",
-      comments: ["Done", "Good Work", "Thanks"],
-    }
-  },
-  {
-    id: id++,
-    title: 'All-day event',
-    start: todayStr
-  },
-  {
-    id: id++,
-    title: 'All-day event',
-    start: todayStr
-  },
-  {
-    id: id++,
-    title: 'All-day event',
-    start: todayStr
-  },
-  {
-    id: id++,
-    title: 'All-day event',
-    start: todayStr
-  },
-  {
-    id: id++,
-    title: 'All-day event',
-    start: todayStr
-  },
-  {
-    id: id++,
-    title: 'Timed event',
-    start: new Date()
-  }
-]
-
-function fetchDBEvents() {
-  console.log("Would fetch events here!"); // TODO: Fetch from DB
-  return JSON.parse(JSON.stringify(initEvents));
-}
-
-function updateEvent(newEvent) {
-  // eslint-disable-next-line
-  let eventToModIndex = initEvents.findIndex(event => event.id == newEvent.id);
-  initEvents[eventToModIndex] = newEvent;
-}
+import db from '../database.js';
 
 export default function DetailCalendar(props) {
   // States
@@ -77,19 +12,18 @@ export default function DetailCalendar(props) {
   const [showModal, setShowModal] = useState(false);
   
   // Effects
-  /* Fetch events when first mounted */
-  useEffect(fetchEvents,[]);
+  /* Fetch events when first mounted/unmounted*/
+  useEffect(() => {
+    let eventsRef = db.ref('events/');
+    let onValueChange = eventsRef.on('value', snapshot => setEvents(snapshot.val()));
+    return () => eventsRef.off('value', onValueChange);
+  },[]);
   /* Update the selected event shown in the modal when events changes */
   useEffect(() => {
   // eslint-disable-next-line
     selectedEvent && setSelectedEvent(events.find(event => event.id == selectedEvent.id));
   // eslint-disable-next-line
   },[events]);
-
-  // Utility Functions
-  function fetchEvents() {
-    setEvents(fetchDBEvents());
-  }
 
   function renderEventContent(eventInfo) {
     return (
@@ -112,8 +46,9 @@ export default function DetailCalendar(props) {
   }
 
   function handleUpdateEvent(newEvent) {
-    updateEvent(newEvent);
-    fetchEvents(); // Forces Calendar to reload with modified event
+    let key = newEvent.id;
+    let eventRef = db.ref('events/' + key);
+    eventRef.set(newEvent);
   }
 
   return (

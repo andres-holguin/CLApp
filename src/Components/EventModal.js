@@ -22,7 +22,11 @@ export default function EventModal(props) {
   /* Deep copy of an object */
   let copyObject = (object) => JSON.parse(JSON.stringify(object));
   /* Return a new list of comments with old and new comment */
-  let newComments = (comment) => eventData.extendedProps.comments.concat(comment);
+  function newComments(comment) {
+    let comments = eventData.extendedProps.comments;
+    // concat comment to existing, if existing
+    return comments ? comments.concat(comment) : [comment]
+  }
 
   /**
    * Accepts an updater object that specifies how extended props will be updated

@@ -2,24 +2,23 @@ import React from 'react'
 import Papa from 'papaparse'
 
 export default function CSVUploader(props) {
+  // Props
+  let uploadEvents = props.onEventsUpload;
 
-  // Create event objects from the parsed data
+  // Create list of event objects from the parsed data
   function createEvents(fileData) {
-    console.log(fileData)
-    let arr = [];
     let id = 0;
-    fileData.forEach(detail => {
-      arr.push({
+    return fileData.map(detail => {
+      return {
         id: id++,
         title: detail.Type + "-" + detail.Detail,
         start: detail.Date,
         extendedProps: {
           residentName: detail.Name,
-          comments: []
+          comments: ["Detail created on " + Date()]
         }
-      });
+      }
     });
-    return arr;
   }
 
   function handleChange(e) {
@@ -27,7 +26,7 @@ export default function CSVUploader(props) {
     if (!file) return; // User canceled when choosing a file
     Papa.parse(file, {
       header: true,
-      complete: (parsedFile) => props.setEvents(createEvents(parsedFile.data))
+      complete: (parsedFile) => uploadEvents(createEvents(parsedFile.data))
     })
   }
   

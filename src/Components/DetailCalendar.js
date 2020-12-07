@@ -25,6 +25,7 @@ export default function DetailCalendar(props) {
   // eslint-disable-next-line
   },[events]);
 
+  // Utility Functions
   function renderEventContent(eventInfo) {
     return (
       <div role="button" className="hidden-overflow">
@@ -51,6 +52,10 @@ export default function DetailCalendar(props) {
     eventRef.set(newEvent);
   }
 
+  function handleEventsUpload(events) {
+    events.forEach(event => handleUpdateEvent(event));
+  }
+
   return (
     <>
       <FullCalendar
@@ -68,7 +73,7 @@ export default function DetailCalendar(props) {
         onHide={handleModalClose}
         onUpdateEvent={handleUpdateEvent}
       />
-      <CSVUploader setEvents={setEvents}/>
+      <CSVUploader onEventsUpload={handleEventsUpload}/>
     </>
   )
 }
